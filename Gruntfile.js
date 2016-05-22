@@ -1,39 +1,6 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
-    host_config: grunt.file.readJSON('.host_config'),
-    compass: {
-      dist: {
-        options: {
-          sassDir: 'examples/sass',
-          cssDir: 'examples/css',
-          environment: 'production'
-        }
-      }
-    },
-    connect: {
-      server: {
-        options: {
-          port: 8000
-        }
-      }
-    },
-    'ftp-deploy': {
-      build: {
-        auth: {
-          host: '<%- host_config.host %>',
-          port: '<%- host_config.port %>'
-        },
-        src: '.',
-        dest: '<%- host_config.directory %>',
-        exclusions: [
-          '**/.*',
-          '.*',
-          'bower_components',
-          'node_modules'
-        ]
-      }
-    },
     jshint: {
       files: ['src/color-thief.js']
     },
@@ -72,6 +39,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ftp-deploy');
 
 
-  grunt.registerTask('default', ['compass', 'connect', 'watch']);
-  grunt.registerTask('build', ['compass', 'jshint', 'uglify']);
+  grunt.registerTask('default', ['connect', 'watch']);
+  grunt.registerTask('build', ['jshint', 'uglify']);
 };
